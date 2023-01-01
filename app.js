@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 const app = express()
 const debug = Debug('app')
 const PORT = process.env.PORT || 3000;
+const sessionsRouter = express.Router()
 
 // middleware
 app.use(morgan('tiny')) // or combined
@@ -23,6 +24,15 @@ app.use(express.static(path.join(__dirname, '/public/'))) // serve from static
 // set view engine and view path
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
+
+sessionsRouter.route('/').get((req, res) => {
+  res.send('hello sessions')
+})
+
+sessionsRouter.route('/1').get((req, res) => {
+  res.send('hello single sessions')
+})
+app.use('/sessions', sessionsRouter)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Bun, EJS and ExpressJS', data: ['a', 'b', 'c'] })
