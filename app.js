@@ -4,11 +4,14 @@ import Debug from 'debug'
 import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url';
+// you need to add assert { type: "json" } to import JSON in ES modules
+import data from './src/data/mydata.json' assert { type: "json" }
 
 const app = express()
 const debug = Debug('app')
 const PORT = process.env.PORT || 3000;
 const sessionsRouter = express.Router()
+
 
 // middleware
 app.use(morgan('tiny')) // or combined
@@ -27,12 +30,7 @@ app.set('view engine', 'ejs')
 
 sessionsRouter.route('/').get((req, res) => {
   res.render('sessions', {
-    sessions: [
-      { title: 'Session 1', description: 'This is session 1' },
-      { title: 'Session 2', description: 'This is session 2' },
-      { title: 'Session 3', description: 'This is session 3' },
-      { title: 'Session 4', description: 'This is session 4' },
-    ],
+    data,
   })
 })
 
