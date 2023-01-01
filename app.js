@@ -33,9 +33,10 @@ sessionsRouter.route('/').get((req, res) => {
     data,
   })
 })
-
-sessionsRouter.route('/1').get((req, res) => {
-  res.send('hello single sessions')
+// sessions/any-id
+sessionsRouter.route('/:id').get((req, res) => {
+  const id = req.params.id
+  res.send('hello single sessions ' + id)
 })
 app.use('/sessions', sessionsRouter)
 
