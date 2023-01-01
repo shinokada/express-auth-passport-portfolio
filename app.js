@@ -26,7 +26,14 @@ app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
 sessionsRouter.route('/').get((req, res) => {
-  res.send('hello sessions')
+  res.render('sessions', {
+    sessions: [
+      { title: 'Session 1', description: 'This is session 1' },
+      { title: 'Session 2', description: 'This is session 2' },
+      { title: 'Session 3', description: 'This is session 3' },
+      { title: 'Session 4', description: 'This is session 4' },
+    ],
+  })
 })
 
 sessionsRouter.route('/1').get((req, res) => {
