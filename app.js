@@ -10,7 +10,7 @@ import data from './src/data/mydata.json' assert { type: "json" }
 const app = express()
 const debug = Debug('app')
 const PORT = process.env.PORT || 3000;
-const sessionsRouter = express.Router()
+const articlesRouter = express.Router()
 
 
 // middleware
@@ -28,17 +28,20 @@ app.use(express.static(path.join(__dirname, '/public/'))) // serve from static
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
-sessionsRouter.route('/').get((req, res) => {
-  res.render('sessions', {
+articlesRouter.route('/').get((req, res) => {
+  res.render('articles', {
     data,
   })
 })
-// sessions/any-id
-sessionsRouter.route('/:id').get((req, res) => {
+// articles/any-id
+articlesRouter.route('/:id').get((req, res) => {
   const id = req.params.id
-  res.send('hello single sessions ' + id)
+  res.render('article', {
+    data: data[id]
+  }
+  )
 })
-app.use('/sessions', sessionsRouter)
+app.use('/articles', articlesRouter)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Bun, EJS and ExpressJS', data: ['a', 'b', 'c'] })

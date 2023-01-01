@@ -26,8 +26,7 @@
         <div class="mobile-togle col-md-12 col-sm-12 col-xs-12">
           <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
-              <button type="button" id="hamburger" class="navbar-toggle x collapsed" data-toggle="collapse"
-                data-target="#navbar-collapse-x">
+              <button type="button" id="hamburger" class="navbar-toggle x collapsed" data-toggle="collapse" data-target="#navbar-collapse-x">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -39,8 +38,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                   <div class="search1">
-                    <button type="submit"><i class="fa fa-search"></i></button> <input type="text" class="form-control"
-                      placeholder="Search">
+                    <button type="submit"><i class="fa fa-search"></i></button> <input type="text" class="form-control" placeholder="Search">
                   </div>
                 </li>
                 <ul class="navbar-nav mr-auto">
@@ -48,7 +46,7 @@
                     <a class="nav-link" href="our-story.html">Our story<span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="sessions">Sessions</a>
+                    <a class="nav-link" href="articles">articles</a>
                   </li>
 
                   <li class="nav-item">
@@ -69,8 +67,7 @@
 
         <div class="right_section col-md-5 col-xs-12">
           <div class="search">
-            <button type="submit"><i class="fa fa-search"></i></button> <input type="text" class="form-control"
-              placeholder="Search">
+            <button type="submit"><i class="fa fa-search"></i></button> <input type="text" class="form-control" placeholder="Search">
           </div>
 
 
@@ -85,7 +82,7 @@
                   <a class="nav-link" href="our-story.html">Our story<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="sessions">Sessions</a>
+                  <a class="nav-link" href="articles">articles</a>
                 </li>
 
                 <li class="nav-item">
@@ -122,16 +119,16 @@
     <section class="sec_include">
       <div class="container">
         <% data.map((item,index)=>{%>
-          <div class="col-xs-12 col-sm-4 col-md-4 adj_text">
-            <h3>
-              <%=item.title%>
-            </h3>
-            <p>
-              <%=item.description.slice(0,300)%>
-            </p>
-            <a href="/sessions/<%=index%>" class="btn-oval">Learn More</a>
-          </div>
-          <% }) %>
+        <div class="col-xs-12 col-sm-4 col-md-4 adj_text">
+          <h3>
+            <%=item.title%>
+          </h3>
+          <p>
+            <%=item.description.slice(0,300)%>
+          </p>
+          <a href="/articles/<%=index%>" class="btn-oval">Learn More</a>
+        </div>
+        <% }) %>
       </div>
     </section>
 
@@ -140,15 +137,14 @@
       <div class="container">
         <div class="main-footer col-md-12 col-xs-12">
           <div class="foter-logo col-md-3 col-sm-3 col-xs-2">
-            <a href="/"><img class="desktop" src="images/Globo-Logo-white-footer.svg"><img class="mobileImg"
-                src="images/G.png">
+            <a href="/"><img class="desktop" src="images/Globo-Logo-white-footer.svg"><img class="mobileImg" src="images/G.png">
             </a>
           </div>
           <div class="links col-md-5 col-md-5 col-xs-10">
             <ul class="quick-links col-md-4 col-xs-6">
 
               <li><a href="our-story.html">Our Story</a></li>
-              <li><a href="sessions">Sessions</a></li>
+              <li><a href="articles">articles</a></li>
               <li><a href="robotics.html">Robotics</a></li>
               <li><a href="media.html">Media</a></li>
               <li><a href="#">Support</a></li>
@@ -162,7 +158,8 @@
             </ul>
           </div>
         </div>
-      </div><!---container-->
+      </div>
+      <!---container-->
       <div class="video-sec col-md-4 col-sm-12 col-xs-12">
         <h1 class="video-heading text-center"><img src="images/pluralsight-white.png"></h1>
         <span class="border"></span>
@@ -182,28 +179,25 @@
 
 
 
-
-
-
-  </div><!---------- End of Wrapper ----------->
+  </div>
+  <!---------- End of Wrapper ----------->
 
 
 
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function() {
 
       // alert("wow");
       //  jQuery("header").addClass("fixed");
-      jQuery("#hamburger").click(function () {
+      jQuery("#hamburger").click(function() {
         //alert("The paragraph was clicked.");
         jQuery("header").toggleClass("fixed");
       });
 
 
     });
-
   </script>
 
 </body>
