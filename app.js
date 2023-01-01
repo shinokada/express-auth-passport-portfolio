@@ -25,7 +25,7 @@ app.set('views', './src/views')
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-  res.send('Hello from my app')
+  res.render('index', { title: 'Bun, EJS and ExpressJS', data: ['a', 'b', 'c'] })
 })
 
 app.listen(PORT, () => {
