@@ -38,29 +38,20 @@ adminRouter.route('/').get((req, res) => {
     level: { type: String }
   });
   // Function call
-  Article.insertMany(articles).then(function () {
-    debug("Data inserted")  // Success
-  }).catch(function (error) {
-    debug('error', error)      // Failure
-  })
-  debug('Done.')
-  res.send('Done')
-  // debug(client)
-  // async function run () {
-  //   try {
-  //     debug('connecting')
-  //     // await client.connect()
-  //     debug('Connected to the mongo DB')
-  //     const db = client.db(dbName)
-  //     // const response = await db.collection('articles').insertMany(articles)
-  //     // res.json(response)
-  //   } catch (error) {
-  //     debug('error: ', error.stack)
-  //   } finally {
-  //     debug('Closing')
-  //     await client.close()
-  //   }
-  // }
+  // Article.insertMany(articles).then(function () {
+  //   debug("Data inserted")  // Success
+  // }).catch(function (error) {
+  //   debug('error', error)      // Failure
+  // })
+  (async function insertArticles () {
+    try {
+      const response = await Article.insertMany(articles);
+      debug("Data inserted");
+      res.json(response)
+    } catch (error) {
+      debug('error', error);
+    }
+  })()
 })
 
 export { adminRouter }
