@@ -37,15 +37,6 @@ adminRouter.route('/').get(async (req, res) => {
   } finally {
     client.close()
   }
-  // (async function insertArticles () {
-  //   try {
-  //     const response = await Article.insertMany(articles);
-  //     debug("Data inserted");
-  //     res.json(response)
-  //   } catch (error) {
-  //     debug('error', error);
-  //   }
-  // })()
 })
 
 export { adminRouter }
