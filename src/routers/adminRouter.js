@@ -10,10 +10,7 @@ const adminRouter = express.Router()
 const url = process.env.UPSTASH_REDIS_REST_URL
 const token = process.env.UPSTASH_REDIS_REST_TOKEN
 
-const upstash = new Redis({
-  url,
-  token,
-});
+const upstash = new Redis({ url, token })
 
 adminRouter.route('/').get(async (req, res) => {
   try {
