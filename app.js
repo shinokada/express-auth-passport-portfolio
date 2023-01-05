@@ -6,14 +6,15 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
+import { articlesRouter } from './src/routers/articlesRouter.js'
+import { adminRouter } from './src/routers/adminRouter.js'
+import { authRouter } from './src/routers/authRouter.js'
+// browser reload
 
 const app = express()
 const debug = Debug('app')
 const PORT = process.env.PORT || 3000;
 
-import { articlesRouter } from './src/routers/articlesRouter.js'
-import { adminRouter } from './src/routers/adminRouter.js'
-import { authRouter } from './src/routers/authRouter.js'
 
 // middleware
 app.use(morgan('tiny')) // or combined
