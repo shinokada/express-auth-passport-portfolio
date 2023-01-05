@@ -104,15 +104,15 @@
 
     <section class="sec_include">
       <div class="container">
-        <% articles.map((article,index)=>{%>
+        <% Object.keys(articles).map((key)=>{%>
         <div class="col-xs-12 col-sm-4 col-md-4 adj_text">
           <h3>
-            <%=article.title%>
+            <%=articles[key].title%>
           </h3>
           <p>
-            <%=article.description.slice(0,300)%>
+            <%=articles[key].description%>
           </p>
-          <a href="/articles/<%=article._id%>" class="btn-oval">Learn More</a>
+          <a href="/articles/<%=articles[key].id%>" class="btn-oval">Learn More</a>
         </div>
         <% }) %>
       </div>

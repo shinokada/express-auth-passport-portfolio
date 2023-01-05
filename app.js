@@ -4,6 +4,8 @@ import Debug from 'debug'
 import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url';
+import cookieParser from 'cookie-parser'
+import session from 'express-session'
 
 const app = express()
 const debug = Debug('app')
@@ -11,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 import { articlesRouter } from './src/routers/articlesRouter.js'
 import { adminRouter } from './src/routers/adminRouter.js'
+import { authRouter } from './src/routers/authRouter.js'
 
 // middleware
 app.use(morgan('tiny')) // or combined
@@ -26,9 +29,12 @@ app.use(express.static(path.join(__dirname, '/public/'))) // serve from static
 // set view engine and view path
 app.set('views', './src/views')
 app.set('view engine', 'ejs')
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 app.use('/articles', articlesRouter)
 app.use('/admin', adminRouter)
+app.use('/auth', authRouter)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Bun, EJS and ExpressJS', data: ['a', 'b', 'c'] })

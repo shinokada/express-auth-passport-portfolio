@@ -1,4 +1,6 @@
-<form action="/admin" method="post">
-  <input type="hidden" name="action" value="create" />
-  <button></button>
+<form name="article" action="/admin/create" method="post">
+  title: <input name="title" id="title" /><br />
+  description: <input name="description" id="description" /><br />
+  content: <textarea name="content" id="content" rows="4" cols="50"></textarea>
+  <input type="submit" value="Submit" class="btn btn-primary btn-lg"></input>
 </form>

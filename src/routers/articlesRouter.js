@@ -4,8 +4,6 @@ import pkg from 'mongodb';
 const { MongoClient, ObjectID } = pkg;
 // you need to add assert { type: "json" } to import JSON in ES modules
 // import articles from '../data/mydata.json' assert { type: "json" }
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
 
 const debug = Debug('app:adminRouter')
 const articlesRouter = express.Router()
@@ -24,7 +22,6 @@ articlesRouter.route('/').get(async (req, res) => {
   const client = await MongoClient.connect(url)
   const db = client.db(dbName)
   const collection = db.collection('articles')
-
   try {
     const articles = await collection.find().toArray()
     res.render('articles', { articles })
