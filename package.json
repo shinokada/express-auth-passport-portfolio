@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
     "flowbite": "^1.6.0",
     "postcss": "^8.4.20",
     "postcss-cli": "^10.1.0",
