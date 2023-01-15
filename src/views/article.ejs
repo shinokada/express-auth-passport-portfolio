@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header',{title}); %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    <%=article.title%>
-  </title>
-</head>
+<h1 class="text-4xl dark:text-white py-8"><%=article.title%></h1>
+<p class="dark:text-white text-2xl py-4"><%=article.description%></p>
+<p class="dark:text-white text-xl"><%=article.content%></p>
 
-<body>
-  <%=article.title%><br>
-  <%=article.speakers[0].name%><br>
-  <%=article.description%><br>
-</body>
-
-</html>
+<%- include('partials/footer'); %>
