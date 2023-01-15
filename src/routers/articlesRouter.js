@@ -1,6 +1,7 @@
 import express from 'express'
 import Debug from 'debug'
 import Redis from "ioredis"
+import { v4 as uuidv4 } from 'uuid'
 
 let redis = new Redis(process.env.REDIS_UPSTASH);
 
@@ -61,7 +62,7 @@ articlesRouter.route('/create').post(async (req, res) => {
     //save the new entry to redis
     await redis.set(`article:${id}`, newEntryAsString);
     // Redirect the user to the article page
-    res.redirect(`/article/${newEntry.id}`);
+    res.redirect(`/articles/${newEntry.id}`);
   }
 });
 
