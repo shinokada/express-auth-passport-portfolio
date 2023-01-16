@@ -25,13 +25,13 @@ authRouter.route('/signup').get((req, res) => {
 })
 
 authRouter.route('/signup').post((req, res) => {
-  const { username, password } = req.body;
-  redis.hset(username, 'password', password, (err, reply) => {
+  const { email, password } = req.body;
+  redis.hset(`user:${email}`, 'password', password, (err, reply) => {
     if (err) {
       debug(err);
     } else {
       debug(reply);
-      req.login(username, () => {
+      req.login(email, () => {
         res.redirect('/auth/profile');
       });
     }

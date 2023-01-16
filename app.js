@@ -5,18 +5,19 @@ import morgan from 'morgan'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import passport from 'passport'
-import passportConfig from './src/config/passport.js'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
+import passportConfig from './src/config/passport.js'
 import { articlesRouter } from './src/routers/articlesRouter.js'
 import { adminRouter } from './src/routers/adminRouter.js'
 import { authRouter } from './src/routers/authRouter.js'
-// browser reload
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 const debug = Debug('app')
 const PORT = process.env.PORT || 3000;
-const secret = process.env.SECRET
+const secret = process.env.SECRET || 'secret123'
 
 // middleware
 app.use(morgan('tiny')) // or combined
