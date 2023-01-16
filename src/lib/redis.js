@@ -1,5 +1,5 @@
-// import Redis from 'ioredis'
+import Redis from 'ioredis'
 
-// const redis = new Redis(process.env.UPSTASH_REDIS_REST_URL)
+let redis = new Redis(process.env.REDIS_UPSTASH);
 
-// export default redis
+export default redis

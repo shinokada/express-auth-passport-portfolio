@@ -1,9 +1,7 @@
 import express from 'express'
 import Debug from 'debug'
-import Redis from "ioredis"
+import redis from '../lib/redis.js'
 import { v4 as uuidv4 } from 'uuid'
-
-let redis = new Redis(process.env.REDIS_UPSTASH);
 
 const debug = Debug('app:adminRouter')
 const articlesRouter = express.Router()

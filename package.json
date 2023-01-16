@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "tailwind:css": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/style.css --watch",
-    "start": "DEBUG=app,app:* nodemon app.js --ext *",
+    "start": "DEBUG=app,app:* nodemon app.js --ext js,json,ejs",
     "debug": "DEBUG=* nodemon app.js -e ejs",
     "start:tailwind": "concurrently \"npm run tailwind:css\" \"npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
