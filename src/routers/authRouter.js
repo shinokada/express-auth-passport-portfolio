@@ -20,37 +20,41 @@ authRouter.route('/').get((req, res) => {
 });
 
 authRouter.route('/signup').get((req, res) => {
-  const pageTitle = 'Sing-up'
+  const pageTitle = 'Member Sing-up'
   res.render('signup', { title: pageTitle });
-})
+}).post(async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    debug('Connected to the redis DB');
 
-authRouter.route('/signup').post((req, res) => {
-  const { email, password } = req.body;
-  redis.hset(`user:${email}`, 'password', password, (err, reply) => {
-    if (err) {
-      debug(err);
-    } else {
-      debug(reply);
-      req.login(email, () => {
-        res.redirect('/auth/profile');
-      });
-    }
-  });
-})
+    const user = JSON.stringify({ username, password });
+    await redis.set(`user:member:${username}`, user);
+    debug(`User ${username} added to Redis`);
+
+    req.login(JSON.parse(user), () => {
+      res.redirect('/auth/signin');
+    });
+  } catch (error) {
+    debug(error);
+  }
+});
+
 
 authRouter.route('/signin').get((req, res) => {
-  const pageTitle = 'Sign-in'
+  const pageTitle = 'Member Sign-in'
   res.render('signin', { title: pageTitle });
 }).post(
   passport.authenticate('local', {
-    successRedirect: '/auth/profile',
+    successRedirect: '/admin/profile',
     failureRedirect: '/',
   })
 );
 
 
-authRouter.route('/profile').get((req, res) => {
-  res.json(req.user);
-});
+// authRouter.route('/profile').get((req, res) => {
+//   const pageTitle = "Profile"
+//   debug('req.user: ', req.user)
+//   res.render('profile', { title: pageTitle, user: req.user });
+// });
 
 export { authRouter }

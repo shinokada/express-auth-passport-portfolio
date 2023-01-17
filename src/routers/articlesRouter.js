@@ -21,16 +21,20 @@ articlesRouter.route('/').get(async (req, res) => {
 })
 
 articlesRouter.route('/create').get(async (req, res) => {
+  if (!req.user) {
+    res.redirect('/auth/signIn');
+  }
+
   const pageTitle = 'Create article'
   res.render('create', { title: pageTitle });
 });
 
 articlesRouter.route('/create').post(async (req, res) => {
-  // Get the form data from the request body
+  if (!req.user) {
+    res.redirect('/auth/signIn');
+  }
+
   const { title, description, content } = req.body;
-  // Create a new article in the database
-  // let article = await createArticle({ title, description, content });
-  // let { title, description, content } = req.body
 
   if (!title) {
     res.status(400).json({
@@ -47,12 +51,10 @@ articlesRouter.route('/create').post(async (req, res) => {
     }
     //validate the newEntry
     if (!newEntry.description) {
-      res.status(400).json({ error: 'Description can not be empty' });
-      return;
+      return res.status(400).json({ error: 'Description can not be empty' });
     }
     if (!newEntry.content) {
-      res.status(400).json({ error: 'Content can not be empty' });
-      return;
+      return res.status(400).json({ error: 'Content can not be empty' });
     }
 
     //stringify the new entry

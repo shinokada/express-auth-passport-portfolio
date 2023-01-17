@@ -8,22 +8,25 @@ export default function localStrategy () {
   passport.use(
     new Strategy(
       {
-        emailField: 'email',
+        usernameField: 'username',
         passwordField: 'password',
       },
-      async (email, password, done) => {
-        try {
-          debug('Connected to the Redis DB');
-          const user = JSON.parse(await redis.get(`user:${email}`));
+      (username, password, done) => {
+        (async function validateUser () {
+          try {
+            debug('Connected to the redis DB');
 
-          if (user && user.password === password) {
-            done(null, user);
-          } else {
-            done(null, false);
+            const user = await redis.get(`user:member:${username}`);
+
+            if (user && JSON.parse(user).password === password) {
+              done(null, user);
+            } else {
+              done(null, false);
+            }
+          } catch (error) {
+            done(error, false);
           }
-        } catch (error) {
-          done(error, false);
-        }
+        })();
       }
     )
   );
