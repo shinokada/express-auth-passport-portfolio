@@ -8,15 +8,15 @@ export default function localStrategy () {
   passport.use(
     new Strategy(
       {
-        usernameField: 'email',
+        usernameField: 'username',
         passwordField: 'password',
       },
-      (email, password, done) => {
+      (username, password, done) => {
         (async function validateUser () {
           try {
             debug('Connected to the redis DB');
 
-            const user = await redis.get(`user:admin:${email}`);
+            const user = await redis.get(`user:member:${username}`);
 
             if (user && JSON.parse(user).password === password) {
               done(null, user);

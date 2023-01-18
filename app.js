@@ -3,7 +3,7 @@ import chalk from 'chalk'
 import Debug from 'debug'
 import morgan from 'morgan'
 import path from 'path'
-import flash from 'connect-flash';
+// import flash from 'connect-flash';
 import { fileURLToPath } from 'url';
 import passport from 'passport'
 import cookieParser from 'cookie-parser'
@@ -42,7 +42,7 @@ app.use(session({ secret }))
 import passportConfig from './src/config/passport.js'
 passportConfig(app)
 // must be after session middleware
-app.use(flash());
+// app.use(flash());
 
 app.use('/articles', articlesRouter)
 app.use('/admin', adminRouter)

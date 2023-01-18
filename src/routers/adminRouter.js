@@ -67,7 +67,7 @@ adminRouter.route('/create').post(async (req, res) => {
 adminRouter.route('/profile').get((req, res) => {
   const pageTitle = "Profile"
   debug('req.user: ', req.user)
-  res.render('profile', { title: pageTitle, user: JSON.parse(req.user) });
+  res.render('profile', { title: pageTitle, user: req.user });
 });
 
 export { adminRouter }

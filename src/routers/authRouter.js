@@ -24,16 +24,12 @@ authRouter.route('/signup').get((req, res) => {
   res.render('signup', { title: pageTitle });
 }).post(async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     debug('Connected to the redis DB');
-
-    const user = JSON.stringify({ email, password });
-    await redis.set(`user:member:${email}`, user);
-    debug(`User ${email} added to Redis`);
-
-    req.login(JSON.parse(user), () => {
-      res.redirect('/auth/signin');
-    });
+    const user = JSON.stringify({ username, password });
+    await redis.set(`user:member:${username}`, user);
+    debug(`User ${username} added to Redis`);
+    res.redirect('/auth/signin');
   } catch (error) {
     debug(error);
   }
@@ -54,10 +50,7 @@ authRouter.route('/logout').get((req, res) => {
   req.logout(); // provided by passport, removes the req.user property and clears the login session
   res.redirect('/'); // redirect to home page
 });
-// authRouter.route('/profile').get((req, res) => {
-//   const pageTitle = "Profile"
-//   debug('req.user: ', req.user)
-//   res.render('profile', { title: pageTitle, user: req.user });
-// });
+
+
 
 export { authRouter }
