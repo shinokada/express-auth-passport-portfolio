@@ -24,12 +24,12 @@ authRouter.route('/signup').get((req, res) => {
   res.render('signup', { title: pageTitle });
 }).post(async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     debug('Connected to the redis DB');
 
-    const user = JSON.stringify({ username, password });
-    await redis.set(`user:member:${username}`, user);
-    debug(`User ${username} added to Redis`);
+    const user = JSON.stringify({ email, password });
+    await redis.set(`user:member:${email}`, user);
+    debug(`User ${email} added to Redis`);
 
     req.login(JSON.parse(user), () => {
       res.redirect('/auth/signin');
