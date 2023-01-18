@@ -4,9 +4,11 @@
   <%= title %>
 </h1>
 
+
 <form name="signup" action="/auth/signup" method="post">
   <div class="mb-6">
     <div>
+
       <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
       <input type="text" name="username" id="username" class="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" required>
       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
@@ -14,6 +16,9 @@
       <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
         Submit
       </button>
+    </div>
+    <div class="text-sm mt-4 font-medium text-gray-500 dark:text-gray-400">
+      Already have an account? <a href="/auth/signin" class="text-primary-700 hover:underline dark:text-primary-500">Login here</a>
     </div>
 </form>
 

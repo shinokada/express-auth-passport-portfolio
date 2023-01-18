@@ -50,7 +50,10 @@ authRouter.route('/signin').get((req, res) => {
   })
 );
 
-
+authRouter.route('/logout').get((req, res) => {
+  req.logout(); // provided by passport, removes the req.user property and clears the login session
+  res.redirect('/'); // redirect to home page
+});
 // authRouter.route('/profile').get((req, res) => {
 //   const pageTitle = "Profile"
 //   debug('req.user: ', req.user)

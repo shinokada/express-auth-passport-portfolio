@@ -3,6 +3,7 @@ import localStrategy from './strategies/local.strategy.js'
 
 localStrategy()
 
+
 const passportConfig = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
