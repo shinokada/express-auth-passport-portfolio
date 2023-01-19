@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('partials/header',{title}); %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bun, EJS, and ExpressJS</title>
-</head>
+<h1 class="text-3xl my-8 dark:text-white">
+  <%= title %>
+</h1>
 
-<body>
-  Welcome to <%=title%>
-</body>
+<img class="h-auto max-w-full mb-8" src="/images/image-1@2x.jpg" alt="image description">
 
-</html>
+<p class="p-4 mb-4 text-xl text-grey-900 rounded-lg dark:text-white">
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae felis sit amet tellus egestas fermentum. Nunc lorem diam, sagittis ut dui in, congue eleifend felis. Praesent iaculis porttitor justo vitae feugiat. Ut non consectetur arcu. Praesent eget lorem pulvinar, fringilla urna sit amet, cursus erat. Maecenas vulputate semper nulla, scelerisque congue massa auctor tristique. Nunc a vehicula tortor. Praesent quis mi suscipit, sodales purus a, posuere ante. Pellentesque eleifend tincidunt turpis in gravida. Cras in sollicitudin ante. Suspendisse accumsan leo ac purus convallis gravida. Mauris facilisis luctus justo sed rhoncus. Maecenas lacus mauris, mollis non libero maximus, molestie lobortis sapien.
+</p>
+
+<p class="p-4 mb-32 text-xl text-grey-900 rounded-lg dark:text-white">
+  Vivamus in risus a ante pharetra sagittis ullamcorper ut elit. Integer at lacus ut augue rutrum interdum. Phasellus feugiat dui in sem blandit, ac posuere felis molestie. Duis justo sapien, hendrerit eu congue vel, pellentesque vitae mauris. Aliquam sit amet vulputate nisl, non eleifend est. Nulla facilisi. Mauris pharetra consequat urna, quis interdum nibh consequat sed.
+</p>
+
+<%- include('partials/footer'); %>

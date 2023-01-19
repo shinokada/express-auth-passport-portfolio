@@ -3,33 +3,49 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "DEBUG=app,app:* nodemon app.js",
-    "debug": "DEBUG=* nodemon app.js",
+    "tailwind:css": "npx tailwindcss -i ./public/styles/tailwind.css -o ./public/styles/style.css --watch",
+    "start": "DEBUG=app,app:* nodemon app.js --ext js,json,ejs",
+    "debug": "DEBUG=* nodemon app.js -e js,json,ejs",
+    "start:tailwind": "concurrently \"npm run tailwind:css\" \"npm run start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@upstash/redis": "^1.18.5",
     "axios": "0.21.1",
     "chalk": "4.1.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "1.4.5",
     "debug": "4.3.1",
     "ejs": "3.1.6",
+    "email-validator": "^2.0.4",
     "express": "4.17.1",
     "express-session": "1.17.1",
+    "ioredis": "^5.2.4",
     "mongodb": "3.6.6",
     "morgan": "1.10.0",
-    "nodemon": "2.0.7",
+    "nodemon": "latest",
     "passport": "0.4.1",
-    "passport-local": "1.0.0"
+    "passport-local": "1.0.0",
+    "uuid": "^9.0.0"
   },
   "nodemonConfig": {
     "restartable": "rs",
-    "delay": 2500,
+    "delay": 1500,
     "env": {
-      "PORT": 4000
+      "PORT": 4001
     }
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
+    "flowbite": "^1.6.0",
+    "postcss": "^8.4.20",
+    "postcss-cli": "^10.1.0",
+    "tailwindcss": "^3.2.4"
   }
 }

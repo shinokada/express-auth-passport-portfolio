@@ -1,0 +1,12 @@
+<%- include('partials/header', { title }); %>
+
+<h1 class="text-3xl my-8 dark:text-white">
+  <%= title %>
+</h1>
+
+
+<h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Hi <%= user.username %>!</h5>
+  <p class="font-normal text-gray-700 dark:text-gray-400">Email: <%= user.email %></p>
+
+
+  <%- include('partials/footer'); %>

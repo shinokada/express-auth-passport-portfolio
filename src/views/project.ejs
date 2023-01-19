@@ -1,0 +1,9 @@
+<%- include('partials/header',{title}); %>
+
+<h1 class="text-4xl dark:text-white py-8"><%=project.projectName%></h1>
+<img src="<%=project.image%>" />
+<p class="dark:text-white text-2xl py-4"><%=project.description%></p>
+<p class="dark:text-white text-xl py-4">By: <%=project.username%></p>
+<p class="dark:text-white text-xl"><%=project.content%></p>
+
+<%- include('partials/footer'); %>

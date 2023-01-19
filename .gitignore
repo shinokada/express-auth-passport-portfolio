@@ -22,3 +22,6 @@ lerna-debug.log*
 
 .vercel
 .vscode/
+
+.vercel
+.vscode/
