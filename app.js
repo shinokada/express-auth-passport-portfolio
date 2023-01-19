@@ -12,7 +12,7 @@ import { isAuth } from './src/middleware/isAuth.js';
 import { projectsRouter } from './src/routers/projectsRouter.js'
 import { adminRouter } from './src/routers/adminRouter.js'
 import { authRouter } from './src/routers/authRouter.js'
-import { feedRouter } from './src/routers/feedRouter.js'
+import { cronRouter } from './src/routers/cronRouter.js'
 import * as dotenv from 'dotenv'
 dotenv.config()
 
@@ -50,7 +50,7 @@ app.use(isAuth);
 app.use('/projects', projectsRouter)
 app.use('/admin', adminRouter)
 app.use('/auth', authRouter)
-app.use('/feed', feedRouter)
+app.use('/cron', cronRouter)
 
 app.get('/', (req, res) => {
   res.render('index', { title: 'Awesome Portfolio', data: ['a', 'b', 'c'] })

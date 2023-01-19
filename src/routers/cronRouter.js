@@ -5,9 +5,13 @@ import { addUsCities } from '../data/uscities.js'
 import { addIntCities } from '../data/worldcities.js'
 
 const debug = Debug('app:feedRouter')
-const feedRouter = express.Router()
+const cronRouter = express.Router()
 
-feedRouter.route('/').get((req, res) => {
+cronRouter.route('/').get((req, res) => {
+  res.send('Ok')
+})
+
+cronRouter.route('/feed').get((req, res) => {
   redis.flushall();
   addUsCities();
   addIntCities();
@@ -15,4 +19,4 @@ feedRouter.route('/').get((req, res) => {
   res.send('Flushed all data and inserted fresh data including uscities and world cities.')
 })
 
-export { feedRouter }
+export { cronRouter }
