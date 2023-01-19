@@ -34,14 +34,15 @@
   },
   "nodemonConfig": {
     "restartable": "rs",
-    "delay": 2500,
+    "delay": 1500,
     "env": {
-      "PORT": 4000
+      "PORT": 4001
     }
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
     "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
     "flowbite": "^1.6.0",
     "postcss": "^8.4.20",
     "postcss-cli": "^10.1.0",

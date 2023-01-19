@@ -1,10 +1,19 @@
 import Redis from 'ioredis'
+// UPSTASH start
+import dotenv from 'dotenv';
+import { redis_host, redis_port } from '../config/redisconfig.js';
 
-// const redis = new Redis(process.env.REDIS_UPSTASH);
+const config = dotenv.config();
 
-const redis = new Redis({
-  host: 'localhost',
-  port: 6379,
-});
+const UPSTASH_REDIS = process.env.UPSTASH_REDIS || config.parsed.UPSTASH_REDIS
+
+const redis = new Redis(UPSTASH_REDIS);
+// UPSTASH end
+
+// For local redis
+// const redis = new Redis({
+//   host: 'localhost',
+//   port: 6379,
+// });
 
 export default redis
