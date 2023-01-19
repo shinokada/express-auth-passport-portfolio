@@ -1,9 +1,12 @@
-# Bun, EJS, ExpressJS
+# Express-Redis-Auth-Passport
 
 ```bash
 # install
-bun install
+pnpm install
 # development
-bun run debug
+npm run tart:tailwind
 ```
+
+Set values in the `.env` file. Use development for development with UPSTASH_REDIS and use localdevelopment for development with local REDIS for NODE_ENV.
+
 
