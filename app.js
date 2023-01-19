@@ -52,6 +52,7 @@ app.use('/admin', adminRouter)
 app.use('/auth', authRouter)
 app.use('/cron', cronRouter)
 
+
 app.get('/', (req, res) => {
   res.render('index', { title: 'Awesome Portfolio', data: ['a', 'b', 'c'] })
 })
