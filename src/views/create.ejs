@@ -1,14 +1,17 @@
 <%- include('partials/header',{title}); %>
 
-<form name="article" action="/articles/create" method="post">
+<form name="project" action="/projects/create" method="post">
   <div class="mb-6">
     <div>
-      <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-      <input type="text" name="title" id="title" class="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="title" required>
+      <label for="projectName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Name</label>
+      <input type="text" name="projectName" id="projectName" class="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Project name" required>
+      <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+      <input type="text" name="image" id="image" class="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Image" required>
       <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
       <input type="text" name="description" id="description" class="mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="description" required>
       <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
       <textarea id="content" name="content" rows="4" class="mb-4 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your content here..."></textarea>
+      <input value="<%= user.name %>" type="text" name="name" id="name" class="hidden" required>
       <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
         Submit
       </button>

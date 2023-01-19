@@ -10,11 +10,6 @@ const authRouter = express.Router()
 const debug = Debug('app:auth')
 const dbName = 'demo1'
 
-authRouter.route('/testing').get(async (req, res) => {
-  debug('Test page!')
-  res.send('done')
-})
-
 authRouter.route('/').get((req, res) => {
   res.send('auth page');
 });
@@ -24,24 +19,24 @@ authRouter.route('/signup').get((req, res) => {
   res.render('signup', { title: pageTitle });
 }).post(async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
     debug('Connected to the redis DB');
-    const user = JSON.stringify({ email, password });
+    const user = JSON.stringify({ username, email, password });
     await redis.set(`user:member:${email}`, user);
-    debug(`User ${email} added to Redis`);
-    res.redirect('/auth/signin');
+    debug(`User ${username} added to Redis`);
+    res.redirect('/auth/login');
   } catch (error) {
     debug(error);
   }
 });
 
 
-authRouter.route('/signin').get((req, res) => {
-  const pageTitle = 'Member Sign-in'
-  res.render('signin', { title: pageTitle });
+authRouter.route('/login').get((req, res) => {
+  const pageTitle = 'Member Login'
+  res.render('login', { title: pageTitle });
 }).post(
   passport.authenticate('local', {
-    successRedirect: '/admin/profile',
+    successRedirect: '/admin',
     failureRedirect: '/',
   })
 );
