@@ -7,7 +7,7 @@ import '../config/strategies/local.strategy.js'
 
 const authRouter = express.Router()
 
-const debug = Debug('app:auth')
+const debug = Debug('app:authRouter')
 const dbName = 'demo1'
 
 authRouter.route('/').get((req, res) => {

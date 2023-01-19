@@ -6,6 +6,7 @@
       <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Projects</h2>
       <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae felis sit amet tellus egestas fermentum.</p>
     </div>
+    <% if (projects.length > 0) { %>
     <div class="grid gap-8 lg:grid-cols-2">
       <% projects.forEach((project) => { %>
       <project class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -17,7 +18,7 @@
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
             </svg>
             <span class="font-medium dark:text-white">
-              Jese Leos
+              By: <%= project.username %>
             </span>
           </div>
           <a href="/projects/<%= project.id %>" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
@@ -30,6 +31,7 @@
       </project>
       <% }); %>
     </div>
+    <% } %>
   </div>
 </section>
 

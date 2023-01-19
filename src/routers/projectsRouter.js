@@ -3,26 +3,27 @@ import Debug from 'debug'
 import redis from '../lib/redis.js'
 import { v4 as uuidv4 } from 'uuid'
 
-const debug = Debug('app:adminRouter')
+const debug = Debug('app:projectsRouter')
 const projectsRouter = express.Router()
 
-projectsRouter.route('/test').get((req, res) => {
-  if (!req.user) {
-    res.redirect('/auth/login');
-  }
-  res.render('projects-test', { user: JSON.parse(req.user), title: 'test' })
-})
 
 projectsRouter.route('/').get(async (req, res) => {
+  const title = 'Projects'
+  // initialize projects as an empty array
+  let projects = [];
   try {
-    let projects = await redis.keys('project:*');
-    let projectsData = await redis.mget(...projects);
-    projects = projectsData.map(JSON.parse);
-    debug('projects: ', projects)
-    const pageTitle = 'Admin: projects'
-    res.render('projects', { projects, title: pageTitle })
+    // fetch list of keys from Redis that match the pattern 'project:*'
+    const projectKeys = await redis.keys('project:*');
+    if (projectKeys.length > 0) {
+      // fetch the data for each project key and parse the JSON
+      const projectData = await redis.mget(...projectKeys);
+      projects = projectData.map(JSON.parse);
+    }
+    // render the projects template and pass in the title and projects data
+    res.render('projects', { projects, title });
   } catch (error) {
     debug('error', error)
+    res.status(500).send('Error fetching projects');
   }
 })
 
@@ -32,15 +33,16 @@ projectsRouter.route('/create').get((req, res) => {
   }
   debug('req.user: ', req.user)
   const pageTitle = 'Create project'
-  res.render('create', { title: pageTitle, user: { ...req.user } });
+  res.render('create', { title: pageTitle, user: JSON.parse(req.user) });
 });
 
 projectsRouter.route('/create').post(async (req, res) => {
   if (!req.user) {
     res.redirect('/auth/login');
+    return
   }
 
-  const { projectName, description, image, content, name } = req.body;
+  const { projectName, description, image, content, username } = req.body;
 
   if (!projectName) {
     res.status(400).json({
@@ -55,7 +57,7 @@ projectsRouter.route('/create').post(async (req, res) => {
       created_at: Date.now(),
       description,
       content,
-      name
+      username
     }
     //validate the newEntry
     if (!newEntry.description || !newEntry.content || !newEntry.image) {
