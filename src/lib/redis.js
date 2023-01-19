@@ -7,13 +7,13 @@ const config = dotenv.config();
 
 const UPSTASH_REDIS = process.env.UPSTASH_REDIS || config.parsed.UPSTASH_REDIS
 
-// const redis = new Redis(UPSTASH_REDIS);
+const redis = new Redis(UPSTASH_REDIS);
 // UPSTASH end
 
 // For local redis
-const redis = new Redis({
-  host: 'localhost',
-  port: 6379,
-});
+// const redis = new Redis({
+//   host: 'localhost',
+//   port: 6379,
+// });
 
 export default redis
