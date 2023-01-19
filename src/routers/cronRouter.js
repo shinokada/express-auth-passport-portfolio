@@ -3,6 +3,7 @@ import Debug from 'debug'
 import redis from '../lib/redis.js'
 import { addUsCities } from '../data/uscities.js'
 import { addIntCities } from '../data/worldcities.js'
+import { addProjects } from '../data/projects.js'
 
 const debug = Debug('app:feedRouter')
 const cronRouter = express.Router()
@@ -15,6 +16,7 @@ cronRouter.route('/feed').get((req, res) => {
   redis.flushall();
   addUsCities();
   addIntCities();
+  addProjects();
   const title = "Feed router"
   res.send('Flushed all data and inserted fresh data including uscities and world cities.')
 })
