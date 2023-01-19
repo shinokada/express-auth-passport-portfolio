@@ -12,18 +12,4 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'developme
   redis = new Redis({ host: redis_host, port: redis_port });
 }
 
-
-
-// console.log('redis-TEST_EVN', config.parsed.TEST_ENV)
-// const UPSTASH_REDIS = process.env.UPSTASH_REDIS || config.parsed.UPSTASH_REDIS
-
-// const redis = new Redis(UPSTASH_REDIS);
-// UPSTASH end
-
-// For local redis
-// const redis = new Redis({
-//   host: 'localhost',
-//   port: 6379,
-// });
-
 export default redis
