@@ -33,6 +33,7 @@ dependencies:
   connect-flash: 0.1.1
   cookie-parser: 1.4.5
   debug: 4.3.1
+  dotenv: 16.0.3
   ejs: 3.1.6
   email-validator: 2.0.4
   express: 4.17.1
@@ -48,7 +49,6 @@ dependencies:
 devDependencies:
   autoprefixer: 10.4.13_postcss@8.4.21
   concurrently: 7.6.0
-  dotenv: 16.0.3
   flowbite: 1.6.2
   postcss: 8.4.21
   postcss-cli: 10.1.0_postcss@8.4.21
@@ -488,7 +488,7 @@ packages:
   /dotenv/16.0.3:
     resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
     engines: {node: '>=12'}
-    dev: true
+    dev: false
 
   /ee-first/1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
