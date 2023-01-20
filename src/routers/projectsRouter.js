@@ -1,7 +1,8 @@
 import express from 'express'
 import Debug from 'debug'
 import redis from '../lib/redis.js'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
+import { generateUniqueId } from '../lib/utils.js'
 
 const debug = Debug('app:projectsRouter')
 const projectsRouter = express.Router()
@@ -27,51 +28,51 @@ projectsRouter.route('/').get(async (req, res) => {
   }
 })
 
-projectsRouter.route('/create').get((req, res) => {
-  if (!req.user) {
-    res.redirect('/auth/login');
-  }
-  debug('req.user: ', req.user)
-  const pageTitle = 'Create project'
-  res.render('create', { title: pageTitle, user: JSON.parse(req.user) });
-});
+// projectsRouter.route('/create').get((req, res) => {
+//   if (!req.user) {
+//     res.redirect('/auth/login');
+//   }
+//   debug('req.user: ', req.user)
+//   const pageTitle = 'Create project'
+//   res.render('create', { title: pageTitle, user: JSON.parse(req.user) });
+// });
 
-projectsRouter.route('/create').post(async (req, res) => {
-  if (!req.user) {
-    res.redirect('/auth/login');
-    return
-  }
+// projectsRouter.route('/create').post(async (req, res) => {
+//   if (!req.user) {
+//     res.redirect('/auth/login');
+//     return
+//   }
 
-  const { projectName, description, image, content, username } = req.body;
+//   const { projectName, description, image, content, username } = req.body;
 
-  if (!projectName) {
-    res.status(400).json({
-      error: 'Project name can not be empty',
-    })
-  } else if (projectName.length < 150) {
-    const id = uuidv4();
-    const newEntry = {
-      id,
-      projectName,
-      image,
-      created_at: Date.now(),
-      description,
-      content,
-      username
-    }
-    //validate the newEntry
-    if (!newEntry.description || !newEntry.content || !newEntry.image) {
-      return res.status(400).render('error', { message: 'Description, Content and Image can not be empty' });
-    }
+//   if (!projectName) {
+//     res.status(400).json({
+//       error: 'Project name can not be empty',
+//     })
+//   } else if (projectName.length < 150) {
+//     const id = generateUniqueId();
+//     const newEntry = {
+//       id,
+//       projectName,
+//       image,
+//       created_at: Date.now(),
+//       description,
+//       content,
+//       username
+//     }
+//     //validate the newEntry
+//     if (!newEntry.description || !newEntry.content || !newEntry.image) {
+//       return res.status(400).render('error', { message: 'Description, Content and Image can not be empty' });
+//     }
 
-    //stringify the new entry
-    const newEntryAsString = JSON.stringify(newEntry);
-    //save the new entry to redis
-    await redis.set(`project:${id}`, newEntryAsString);
-    // Redirect the user to the project page
-    res.redirect(`/projects/${newEntry.id}`);
-  }
-});
+//     //stringify the new entry
+//     const newEntryAsString = JSON.stringify(newEntry);
+//     //save the new entry to redis
+//     await redis.set(`project:${id}`, newEntryAsString);
+//     // Redirect the user to the project page
+//     res.redirect(`/projects/${newEntry.id}`);
+//   }
+// });
 
 // projects/any-id
 projectsRouter.route('/:id').get(async (req, res) => {

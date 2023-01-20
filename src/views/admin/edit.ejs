@@ -1,0 +1,9 @@
+<%- include('../partials/header',{title}); %>
+
+<h1><%= project.projectName %></h1>
+<img src="<%= project.image %>" alt="<%= project.projectName %>">
+<p><%= project.description %></p>
+<p><%= project.content %></p>
+<p>Created by: <%= project.username %> on <%= project.created_at %></p>
+
+<%- include('../partials/footer'); %>

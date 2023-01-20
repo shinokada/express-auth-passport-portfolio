@@ -1,0 +1,70 @@
+<%- include('../partials/header',{title}); %>
+
+<h1 class="text-3xl my-8 dark:text-white">
+  <%= title %>
+</h1>
+
+<div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+  <div class="w-full">
+    <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Sample Widget</h3>
+    <span class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">2,340</span>
+    <p class="flex items-center text-base font-normal text-gray-500 dark:text-gray-400">
+      <span class="flex items-center mr-1.5 text-sm text-green-500 dark:text-green-400">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path clip-rule="evenodd" fill-rule="evenodd" d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"></path>
+        </svg>
+        3,4%
+      </span>
+      Since last month
+    </p>
+  </div>
+  <div class="w-full" id="week-signups-chart"></div>
+</div>
+
+<form method="POST" action="/projects/delete">
+  <% for(var i = 0; i < projects.length; i++) { %>
+  <div>
+    <input type="checkbox" name="projectsToDelete" value="<%= projects[i].id %>">
+    <%= projects[i].projectName %>
+  </div>
+  <% } %>
+  <button type="submit">Delete selected projects</button>
+</form>
+
+<form method="POST" action="/projects/delete">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Project name
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Edit
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Delete
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < projects.length; i++) { %>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <%= projects[i].projectName %>
+          </th>
+          <td class="px-6 py-4">
+            Sliver
+          </td>
+          <td class="px-6 py-4">
+            <input type="checkbox" name="projectsToDelete" value="<%= projects[i].id %>">
+            <button type="submit">Delete</button>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</form>
+
+<%- include('../partials/footer'); %>
