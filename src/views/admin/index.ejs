@@ -1,7 +1,7 @@
-<%- include('../partials/header',{title}); %>
+<%- include('../partials/header',{title: 'Dashboard'}); %>
 
 <h1 class="text-3xl my-8 dark:text-white">
-  <%= title %>
+  Dashboard
 </h1>
 
 <div class="items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:flex dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -22,43 +22,65 @@
 </div>
 
 
-
-<form method="POST" action="/projects/delete">
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">
-            Project name
-          </th>
-          <th scope="col" class="px-6 py-3">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Project name
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Edit
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Delete
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < projects.length; i++) { %>
+      <% if (projects[i]) { %>
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="project-<%= projects[i].id %>">
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <%= projects[i].projectName %>
+        </th>
+        <td class="px-6 py-4 text-blue-500">
+          <a href="/admin/project-update/<%= projects[i].id %>">
             Edit
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Delete
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i = 0; i < projects.length; i++) { %>
-        <% if (projects[i]) { %>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            <%= projects[i].projectName %>
-          </th>
-          <td class="px-6 py-4">
-            Sliver
-          </td>
-          <td class="px-6 py-4">
-            <input type="checkbox" name="projectsToDelete" value="<%= projects[i].id %>">
-            <button type="submit">Delete</button>
-          </td>
-        </tr>
-        <% } %>
-        <% } %>
-      </tbody>
-    </table>
-  </div>
-</form>
+          </a>
+        </td>
+        <td class="px-6 py-4 text-red-700">
+          <button type="button" onClick="deleteProject('<%= projects[i].id %>')">Delete</button>
+        </td>
+      </tr>
+      <% } %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
 
 <%- include('../partials/footer'); %>
+
+<script>
+  function deleteProject(id) {
+    fetch(`/admin/project-delete/${id}`, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          // remove the deleted project row from the table
+          const row = document.getElementById(`project-${id}`);
+          row.remove();
+          // Show success message
+          console.log(data.message);
+        } else {
+          // Show error message
+          console.log('Failed to delete project');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+</script>

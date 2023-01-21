@@ -1,4 +1,6 @@
-<%- include('../partials/header',{title}); %>
+<%- include('../partials/header',{title: 'Create project'}); %>
+
+<%- include('../partials/error',{error}); %>
 
 <form name="project" action="/admin/create-project" method="post">
   <div class="mb-6">
