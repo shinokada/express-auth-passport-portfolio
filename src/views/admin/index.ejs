@@ -21,15 +21,7 @@
   <div class="w-full" id="week-signups-chart"></div>
 </div>
 
-<form method="POST" action="/projects/delete">
-  <% for(var i = 0; i < projects.length; i++) { %>
-  <div>
-    <input type="checkbox" name="projectsToDelete" value="<%= projects[i].id %>">
-    <%= projects[i].projectName %>
-  </div>
-  <% } %>
-  <button type="submit">Delete selected projects</button>
-</form>
+
 
 <form method="POST" action="/projects/delete">
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -49,6 +41,7 @@
       </thead>
       <tbody>
         <% for(var i = 0; i < projects.length; i++) { %>
+        <% if (projects[i]) { %>
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             <%= projects[i].projectName %>
@@ -61,6 +54,7 @@
             <button type="submit">Delete</button>
           </td>
         </tr>
+        <% } %>
         <% } %>
       </tbody>
     </table>

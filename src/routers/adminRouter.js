@@ -1,41 +1,60 @@
 import express from 'express'
+import chalk from 'chalk'
 import Debug from 'debug'
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 import redis from '../lib/redis.js'
+import { replaceSpacesWithDashes } from '../lib/utils.js'
 
 const debug = Debug('app:adminRouter')
 const adminRouter = express.Router()
 
 adminRouter.use((req, res, next) => {
+  try {
+    req.user = JSON.parse(req.user);
+  } catch (e) {
+    console.error("req.user is not a valid json string", e)
+  }
+
   if (req.user) {
     next();
   } else {
     res.redirect('/auth/login');
   }
   // Make sure the user is an admin
-  if (!req.user.isAdmin) {
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
+  // if (!req.user.isAdmin) {
+  //   res.status(401).json({ error: 'Unauthorized' });
+  //   return;
+  // }
 });
 
 
-
-// adminRouter.route('/').get((req, res) => {
-//   const title = "Admin Dashboard"
-//   res.render('admin/admin', { title })
-// })
-
 adminRouter.route('/').get(async (req, res) => {
-  // Get all the project keys from Redis
-  const projectKeys = await redis.keys('project:*');
-  const projects = await Promise.all(projectKeys.map(async key => {
-    const projectAsString = await redis.get(key);
-    return JSON.parse(projectAsString);
-  }));
+  let projects = []
+
+  if (req.user && req.user.isAdmin) {
+    // Get all the project keys from Redis
+    const projectKeys = await redis.keys('project:*');
+    projects = await Promise.all(projectKeys.map(async key => {
+      const projectAsString = await redis.get(key);
+      return JSON.parse(projectAsString);
+    }));
+  } else if (req.user) {
+
+    const username = req.user.username
+    // This will return an array of project ids for the user with the provided username.
+    const projectIds = await redis.smembers(`projects:username:${username}`);
+    debug(chalk.green('projectIds: ', projectIds))
+
+    for await (const id of projectIds) {
+      const project = JSON.parse(await redis.get(`project:slug:${id}`))
+      projects.push(project)
+    }
+
+  }
+  debug(chalk.green('projects: ', projects))
   const title = "Profile"
   // Render the projects page
-  res.render('admin/admin', { projects, title });
+  res.render('admin/index', { projects, title });
 });
 
 
@@ -44,12 +63,12 @@ adminRouter.route('/profile').get((req, res) => {
   res.render('admin/profile', { title: pageTitle, user: JSON.parse(req.user) });
 });
 
-adminRouter.route('/create').get((req, res) => {
+adminRouter.route('/create-project').get((req, res) => {
   const pageTitle = 'Create project'
-  res.render('admin/create', { title: pageTitle, user: JSON.parse(req.user) });
+  res.render('admin/create-project', { title: pageTitle, user: req.user });
 });
 
-adminRouter.route('/create').post(async (req, res) => {
+adminRouter.route('/create-project').post(async (req, res) => {
   const { projectName, description, image, content, username } = req.body;
 
   if (!projectName) {
@@ -57,9 +76,9 @@ adminRouter.route('/create').post(async (req, res) => {
       error: 'Project name can not be empty',
     })
   } else if (projectName.length < 150) {
-    const id = generateUniqueId();
+
     const newEntry = {
-      id,
+      id: replaceSpacesWithDashes(projectName),
       projectName,
       image,
       created_at: Date.now(),
@@ -67,6 +86,7 @@ adminRouter.route('/create').post(async (req, res) => {
       content,
       username
     }
+
     //validate the newEntry
     if (!newEntry.description || !newEntry.content || !newEntry.image) {
       return res.status(400).render('error', { message: 'Description, Content and Image can not be empty' });
@@ -74,18 +94,23 @@ adminRouter.route('/create').post(async (req, res) => {
 
     //stringify the new entry
     const newEntryAsString = JSON.stringify(newEntry);
-    //save the new entry to redis
-    await redis.set(`project:${id}`, newEntryAsString);
+    //save the new entry to redis using the projectKey function
+    await redis.set(`project:slug:${newEntry.id}`, newEntryAsString);
+
+    // Add the project id to the set keyed by the username
+    // to collect all projects by username
+    await redis.sadd(`projects:username:${newEntry.username}`, newEntry.id);
+
     // Redirect the user to the project page
     res.redirect(`/projects/${newEntry.id}`);
   }
 });
 
-adminRouter.route('/:id').get(async (req, res) => {
-  const id = req.params.id;
+adminRouter.route('/:slug').get(async (req, res) => {
+  const slug = req.params.slug;
 
   // Get the project from Redis
-  const projectAsString = await redis.get(`project:${id}`);
+  const projectAsString = await redis.get(`project:${slug}`);
   if (!projectAsString) {
     res.status(404).json({ error: 'Project not found' });
     return;
@@ -93,7 +118,7 @@ adminRouter.route('/:id').get(async (req, res) => {
 
   // Render the project page
   const project = JSON.parse(projectAsString);
-  res.render('admin/edit', { project });
+  res.render('admin/edit-project', { project });
 });
 
 

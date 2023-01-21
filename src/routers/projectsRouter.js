@@ -28,59 +28,12 @@ projectsRouter.route('/').get(async (req, res) => {
   }
 })
 
-// projectsRouter.route('/create').get((req, res) => {
-//   if (!req.user) {
-//     res.redirect('/auth/login');
-//   }
-//   debug('req.user: ', req.user)
-//   const pageTitle = 'Create project'
-//   res.render('create', { title: pageTitle, user: JSON.parse(req.user) });
-// });
-
-// projectsRouter.route('/create').post(async (req, res) => {
-//   if (!req.user) {
-//     res.redirect('/auth/login');
-//     return
-//   }
-
-//   const { projectName, description, image, content, username } = req.body;
-
-//   if (!projectName) {
-//     res.status(400).json({
-//       error: 'Project name can not be empty',
-//     })
-//   } else if (projectName.length < 150) {
-//     const id = generateUniqueId();
-//     const newEntry = {
-//       id,
-//       projectName,
-//       image,
-//       created_at: Date.now(),
-//       description,
-//       content,
-//       username
-//     }
-//     //validate the newEntry
-//     if (!newEntry.description || !newEntry.content || !newEntry.image) {
-//       return res.status(400).render('error', { message: 'Description, Content and Image can not be empty' });
-//     }
-
-//     //stringify the new entry
-//     const newEntryAsString = JSON.stringify(newEntry);
-//     //save the new entry to redis
-//     await redis.set(`project:${id}`, newEntryAsString);
-//     // Redirect the user to the project page
-//     res.redirect(`/projects/${newEntry.id}`);
-//   }
-// });
 
 // projects/any-id
-projectsRouter.route('/:id').get(async (req, res) => {
-  const id = req.params.id
+projectsRouter.route('/:slug').get(async (req, res) => {
+  const slug = req.params.slug
   try {
-    debug('Connecting DB ...')
-    let project = await redis.get(`project:${id}`);
-    debug('project: ', project)
+    let project = await redis.get(`project:slug:${slug}`);
     if (!project) {
       res.status(404).render('404', { message: `Article with id ${id} not found`, title: '404' });
     } else {

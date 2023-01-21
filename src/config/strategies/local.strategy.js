@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 
 const debug = Debug('app:localStrategy')
 
-export default function localStrategy () {
+export default function localStrategy (req) {
   passport.use(
     new Strategy(
       {
@@ -19,12 +19,13 @@ export default function localStrategy () {
 
           const user = await redis.get(`user:member:${email}`);
           if (user) {
+            // to fetch the user object from Redis, the user variable will contain the stringified user object that was stored in Redis.
             const userData = JSON.parse(user);
             const isValid = await bcrypt.compare(password, userData.password);
             if (isValid) {
-              done(null, user);
+              done(null, userData);
             } else {
-              done(null, false);
+              done(null, false, { message: 'Incorrect password' });
             }
           } else {
             done(null, false);
