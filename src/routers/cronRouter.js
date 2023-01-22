@@ -16,7 +16,7 @@ cronRouter.route('/feed').get((req, res) => {
   redis.flushall();
   addUsCities();
   addIntCities();
-  // addProjects();
+  addProjects();
   const title = "Feed router"
   res.send('Flushed all data and inserted fresh data including uscities and world cities.')
 })

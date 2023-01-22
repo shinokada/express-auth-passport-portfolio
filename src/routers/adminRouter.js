@@ -43,7 +43,7 @@ adminRouter.route('/').get(async (req, res) => {
 
 
 adminRouter.route('/profile').get((req, res) => {
-  res.render('admin/profile', { user: JSON.parse(req.user) });
+  res.render('admin/profile', { user: req.user });
 });
 
 adminRouter.route('/create-project').get((req, res) => {
