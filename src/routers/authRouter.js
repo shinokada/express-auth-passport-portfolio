@@ -36,7 +36,7 @@ authRouter.route('/signup').get((req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     debug('Connected to the redis DB');
     // Check if email already exists
-    const emailExists = await redis.exists(`useremail:${email}:id`);
+    const emailExists = await redis.exists(`user:member:${email}`);
     if (emailExists) {
       return res.render('signup', { title: 'Member Sign-up', errors: [{ msg: 'Email already exists' }] });
     }
@@ -47,8 +47,7 @@ authRouter.route('/signup').get((req, res) => {
     }
 
     const userId = generateUniqueId(); // generate a unique user ID
-    // associate the user's ID with the email address, so you can retrieve the user's information later.
-    await redis.set(`useremail:${email}:id`, userId);
+
     // username:${username}:id is used to check if username already exists 
     // By including :id as part of the key, you are indicating that the value being stored is the user's ID and it is associated with the specific username.
 
