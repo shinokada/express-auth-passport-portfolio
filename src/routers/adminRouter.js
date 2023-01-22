@@ -53,7 +53,6 @@ adminRouter.route('/create-project').get((req, res) => {
 
 adminRouter.route('/create-project').post(async (req, res) => {
   const { projectName, description, image, content, username } = req.body;
-
   if (!projectName) {
     res.status(400).json({
       error: 'Project name can not be empty',
@@ -74,6 +73,7 @@ adminRouter.route('/create-project').post(async (req, res) => {
         content,
         username
       }
+
       //validate the newEntry
       if (!newEntry.description || !newEntry.content || !newEntry.image) {
         return res.status(400).render('admin/create-project', { user: req.user, error: 'Description, Content and Image can not be empty' });

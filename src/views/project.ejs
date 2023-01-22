@@ -1,6 +1,6 @@
-<%- include('partials/header',{title}); %>
+<%- include('partials/header',{title: project.projectName}); %>
 
-<h1 class="text-4xl dark:text-white py-8"><%=project.projectName%></h1>
+<h1 class="text-4xl dark:text-white py-8"><%=project.projectName %></h1>
 
 <img class="mx-auto my-auto" src="<%=project.image%>" />
 
