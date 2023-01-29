@@ -13,6 +13,14 @@ export const addProjects = () => {
   const jsonString3 = JSON.stringify(project3);
   redis.set('project:slug:awesome-vue', jsonString3);
 
+  const project4 = { "id": "awesome-astro", "projectName": "Awesome Astro", "image": "/images/project/image-3.jpg", "created_at": 1674385602397, "description": "AstroJS, Typescript, Redis", "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis convallis massa vitae maximus. Phasellus convallis diam vitae pretium aliquam. Proin imperdiet venenatis tortor, at feugiat nunc. Ut augue ante, aliquam eleifend congue quis, vestibulum sit amet nunc. Duis ut aliquet erat. Proin gravida, velit eget sollicitudin varius, purus purus fermentum nulla, eget porttitor ante metus accumsan arcu. Etiam nisi tortor, commodo ac dignissim ut, euismod vel sapien. Nam quis auctor dolor. Proin sapien nisl, rhoncus nec elit vel, aliquet porta odio. In vitae accumsan nulla. In gravida urna sed risus fringilla, id ultricies ipsum cursus. Aliquam porta sapien urna, non sollicitudin lectus feugiat non.\r\n\r\nPhasellus nisl odio, mattis et dignissim aliquet, rhoncus eget velit. Phasellus lacinia facilisis diam et efficitur. Donec vel convallis tortor, lacinia placerat eros. Cras quis venenatis purus. Curabitur eleifend placerat bibendum. Duis ac lacus dolor. Nulla rhoncus sapien id quam maximus cursus. Fusce eu tincidunt purus, eleifend aliquet lectus. Sed rutrum interdum mattis. Pellentesque porttitor libero nunc.\r\n\r\nVivamus pharetra justo ullamcorper libero congue tincidunt. Sed quis felis pulvinar, cursus nunc ac, luctus nisl. Suspendisse at interdum nisi. Nulla mi urna, pharetra eu orci in, rutrum elementum nibh. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus blandit nec metus ut commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur orci odio, pharetra at ligula nec, ultricies malesuada lectus. Cras urna nisl, efficitur nec finibus id, luctus vel risus. Nunc porta magna nec nulla tempor finibus. Integer venenatis lacus vitae ultricies malesuada. Pellentesque bibendum diam molestie lacus porta, vitae fermentum leo viverra. Aliquam fringilla blandit turpis non molestie. Phasellus volutpat luctus quam in euismod. Proin sed tortor tristique, porta nunc non, viverra lorem.", "username": "shin" };
+  const jsonString4 = JSON.stringify(project4);
+  redis.set('project:slug:awesome-astro', jsonString4);
+
+  const project5 = { "id": "awesome-solid", "projectName": "Awesome SolidJS", "image": "/images/project/image-2.jpg", "created_at": 1674385590346, "description": "SolidJS, Typescript, Redis", "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis convallis massa vitae maximus. Phasellus convallis diam vitae pretium aliquam. Proin imperdiet venenatis tortor, at feugiat nunc. Ut augue ante, aliquam eleifend congue quis, vestibulum sit amet nunc. Duis ut aliquet erat. Proin gravida, velit eget sollicitudin varius, purus purus fermentum nulla, eget porttitor ante metus accumsan arcu. Etiam nisi tortor, commodo ac dignissim ut, euismod vel sapien. Nam quis auctor dolor. Proin sapien nisl, rhoncus nec elit vel, aliquet porta odio. In vitae accumsan nulla. In gravida urna sed risus fringilla, id ultricies ipsum cursus. Aliquam porta sapien urna, non sollicitudin lectus feugiat non.\r\n\r\nPhasellus nisl odio, mattis et dignissim aliquet, rhoncus eget velit. Phasellus lacinia facilisis diam et efficitur. Donec vel convallis tortor, lacinia placerat eros. Cras quis venenatis purus. Curabitur eleifend placerat bibendum. Duis ac lacus dolor. Nulla rhoncus sapien id quam maximus cursus. Fusce eu tincidunt purus, eleifend aliquet lectus. Sed rutrum interdum mattis. Pellentesque porttitor libero nunc.\r\n\r\nVivamus pharetra justo ullamcorper libero congue tincidunt. Sed quis felis pulvinar, cursus nunc ac, luctus nisl. Suspendisse at interdum nisi. Nulla mi urna, pharetra eu orci in, rutrum elementum nibh. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus blandit nec metus ut commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur orci odio, pharetra at ligula nec, ultricies malesuada lectus. Cras urna nisl, efficitur nec finibus id, luctus vel risus. Nunc porta magna nec nulla tempor finibus. Integer venenatis lacus vitae ultricies malesuada. Pellentesque bibendum diam molestie lacus porta, vitae fermentum leo viverra. Aliquam fringilla blandit turpis non molestie. Phasellus volutpat luctus quam in euismod. Proin sed tortor tristique, porta nunc non, viverra lorem.", "username": "shin" };
+  const jsonString5 = JSON.stringify(project5);
+  redis.set('project:slug:awesome-solid', jsonString5);
+
   const user = { "username": "shin", "email": "shin@test.com", "password": "shin" };
   const jsonString4 = JSON.stringify(user);
   redis.set('user:member:shin@test.com', jsonString4);
@@ -28,10 +36,14 @@ export const addProjects = () => {
   redis.sadd('projects:username:shin', "awesome-react")
   redis.sadd('projects:username:shin', "awesome-svelte")
   redis.sadd('projects:username:shin', "awesome-vue")
+  redis.sadd('projects:username:shin', "awesome-astro")
+  redis.sadd('projects:username:shin', "awesome-solid")
 
   redis.hset("project:titles", 'awesome-react', 1)
   redis.hset("project:titles", 'awesome-svelte', 1)
   redis.hset("project:titles", 'awesome-vue', 1)
+  redis.hset("project:titles", 'awesome-astro', 1)
+  redis.hset("project:titles", 'awesome-solid', 1)
 }
 
 

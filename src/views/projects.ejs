@@ -6,10 +6,10 @@
     <p class="font-light text-red-500 sm:text-xl dark:text-gray-400">Please be aware that the database is reset daily, so any information submitted will not be retained on this demonstration site.</p>
   </div>
   <% if (projects.length > 0) { %>
-  <div class="flex justify-center">
+  <div class="flex flex-wrap sm:flex-no-wrap p-4">
     <% projects.forEach((project) => { %>
-    <div class="max-w-sm mx-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
       <% if (project != null) { %>
+    <div class="block w-full sm:w-1/3 p-6 bg-white dark:bg-gray-800">
       <a href="/projects/<%= project.id %>">
         <img class="rounded-t-lg" src="<%= project.image %>" alt="" />
       </a>
@@ -29,8 +29,8 @@
           </svg>
         </a>
       </div>
-      <% } %>
     </div>
+    <% } %>
     <% }); %>
   </div>
   <% } %>
