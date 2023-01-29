@@ -57,6 +57,6 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'Awesome Portfolio', data: ['a', 'b', 'c'] })
 })
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   debug(`listening on port ${chalk.green(PORT)}`)
 })

@@ -5,6 +5,7 @@ micros:
       src: .
       engine: nodejs16
       primary: true
+      run: "node app.js"
       presets:
         env:
           - name: SECRET
