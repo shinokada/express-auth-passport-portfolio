@@ -9,7 +9,7 @@
   <div class="flex flex-wrap sm:flex-no-wrap p-4">
     <% projects.forEach((project) => { %>
       <% if (project != null) { %>
-    <div class="block w-full sm:w-1/3 p-6">
+    <div class="block w-full lg:w-1/3 md:w-1/2 p-6">
       <a href="/projects/<%= project.id %>">
         <img class="rounded-t-lg" src="<%= project.image %>" alt="" />
       </a>
