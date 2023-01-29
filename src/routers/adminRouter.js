@@ -10,6 +10,8 @@ const adminRouter = express.Router()
 
 adminRouter.use((req, res, next) => {
   if (req.user) {
+    console.log('Redirected to admin')
+    console.log('req.user', req.user)
     next();
   } else {
     res.redirect('/auth/login');

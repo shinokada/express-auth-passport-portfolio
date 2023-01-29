@@ -91,6 +91,7 @@ authRouter.route('/login').post(
         }
         // const userData = JSON.parse(user);
         req.user = user;
+        console.log('Redirecting to admin ...')
         return res.redirect('/admin');
       });
     })(req, res, next);
