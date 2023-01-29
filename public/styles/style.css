@@ -2294,6 +2294,10 @@ input:checked + .toggle-bg {
     margin-bottom: 4rem;
   }
 
+  .lg\:mb-10 {
+    margin-bottom: 2.5rem;
+  }
+
   .lg\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
